@@ -226,10 +226,14 @@ class Practice {
 
     }
 
+    /**
+     * as  “不安全的”转换操作符
+     * 通常，如果转换是不可能的，转换操作符会抛出一个异常
+     * */
     fun foo3(a: Any?) {
 
 
-        //直接类型转换（如果是String 那么就转换并返回转换后的值，否则不执行代码）
+        //直接类型转换（如果是String 那么就转换并返回转换后的值，否则抛出异常）
         (a as String).replace("a", "v")
 
         //可为null的转 如果尝试转换不成功则返回 null
@@ -300,6 +304,8 @@ class Practice {
      * */
     fun foo6() {
 
+        // https://www.kotlincn.net/docs/reference/ranges.html
+        // rangeTo  downTo reversed step
         val list = listOf(1, 2, 3, 4)
 
         //区间
@@ -430,14 +436,18 @@ class Practice {
     //endregion
 
     //region 集合 数组（list） map ,lambda 表达式
+    //所有的集合都分为可变的和不可变的
 
 
     //https://www.kotlincn.net/docs/reference/lambdas.html
+    /**
+     * list
+     * */
     fun foo7(): Unit {
 
         val list = listOf(1, 23, 4, 5, 5)
+        val mutableListOf = mutableListOf(1, 2, 3) //可变得
 
-        ;
         //迭代
         for (i in list) {//这种就是语法糖了，in用在for中，就相当于iterator next
 
@@ -460,6 +470,9 @@ class Practice {
 
     }
 
+    /**
+     * map
+     * */
     fun foo8() {
         var map = mapOf(1 to "1", 2 to "2")
 
@@ -469,6 +482,9 @@ class Practice {
 
     }
 
+    /**
+     * array
+     * */
     fun foo13() {
         //这个就相当于 new int[]{1,2,3,4}
         val array = arrayOf(1, 2, 3, 4)
@@ -487,8 +503,56 @@ class Practice {
     //endregion
 
 
-    //region 类声明
+    //region 操作符重载  operator关键字
 
+    //有很多内置的操作符对应的函数，我们
+    class ClassO(var a: Int) {
+
+    }
+
+    operator fun ClassO.unaryMinus() = ClassO(-a)
+
+
+    fun foo20(): Unit {
+        val classO = ClassO(1)
+        val classO1 = -classO //变成a为-1了
+    }
 
     //endregion
+
+
+    //region java 和 kotlin互相调用  ，类型别名 ，kotlin关键字
+    /**
+     * https://www.kotlincn.net/docs/reference/java-interop.html
+     * external关键字来使得kotlin调用native方法
+     *
+     * */
+    fun foo21(): Unit {
+
+    }
+
+
+    /**
+     * typealias关键字
+     * 通常缩减集合类型
+     * 函数类型提供另外的别名
+     *
+     * */
+    fun foo22(): Unit {
+
+    }
+
+
+    /**
+     * 关键字集合
+     * https://www.kotlincn.net/docs/reference/keyword-reference.html
+     *
+     * */
+    fun foo23(): Unit {
+
+    }
+
+    //endregion
+
+
 }
