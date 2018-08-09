@@ -16,3 +16,31 @@ classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.30"
 //这里很坑，我们可以在AS的Settings中的Plugin中看到kotlin插件的版本
 
 ```
+
+
+### 基础概念
+表达式：一个表达式是有返回值的，他可以在赋值语句的右边
+比如，var a = 1+2+3  
+1+2+3  就叫一个表达式
+
+//if当做表达式
+var max = if(a>b) a else b
+
+//if当做条件控制语句，因为并没有返回值
+if(a>b)
+ print(a)
+else
+ print(b)
+
+
+
+
+
+
+
+
+
+
+
+
+

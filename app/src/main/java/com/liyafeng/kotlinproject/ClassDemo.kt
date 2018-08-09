@@ -75,3 +75,326 @@ class MyView1(context: Context) : View(context) {
 
 }
 
+
+// 属性，getter setter自定义   field关键字-幕后字段  const关键字-常量
+// lateinit 延迟初始化属性与变量
+class FieldClass {
+
+}
+
+
+//接口  (属性，)
+interface MyInterface {
+    var a: Int;
+
+    fun foo()
+}
+
+interface MyInterface1 {
+    var a: Int;
+
+    fun foo()
+}
+
+class Class1 : MyInterface, MyInterface1 {
+
+
+    override var a: Int
+        get() = 4
+        set(value) {}
+
+
+    //解决覆盖冲突,好像不行。。。
+    override fun foo() {
+//        super<MyInterface>.foo()
+//        super<MyInterface1>.foo()
+    }
+
+
+}
+
+
+/**
+private 意味着只在这个类内部（包含其所有成员）可见；
+protected—— 和 private一样 + 在子类中可见。
+internal —— 能见到类声明的 本模块内 的任何客户端都可见其 internal 成员；
+public —— 能见到类声明的任何客户端都可见其 public 成员。
+ * */
+
+
+//扩展函数,好像只能在同一文件中使用。。。
+fun String.haha() {
+    //this代表当前String对象
+    this.replace("1", "2")
+    "22".haha()
+}
+
+
+open class C
+
+class D : C()
+
+fun C.foo() = "c"
+
+fun D.foo() = "d"
+
+fun printFoo(c: C) {
+    println(c.foo())
+
+}
+
+//printFoo(D())  这个打印c，因为拓展方法只针对当前类型，和继承没关系
+
+//成员函数与一个扩展函数同名，总是取成员函数
+
+
+fun Any?.toString(): String {
+    if (this == null) return "null"
+    // 空检测之后，“this”会自动转换为非空类型，所以下面的 toString()
+    // 解析为 Any 类的成员函数
+    return toString()
+}
+
+//扩展属性
+
+var String.size: Int
+    get() = length - 1
+    set(value) {
+        print(value)
+    }
+
+//val Foo.bar = 1 // 错误：扩展属性不能有   初始化器  =1就是初始化器
+
+
+//数据类 就是实体类
+
+
+//解构声明  将一个有componentN()函数的对象拆解
+
+//密封类  sealed关键字
+
+//泛型  out ,in 关键字
+
+
+// 如果同一类型参数需要多个上界，我们需要一个单独的 where-子句：  where关键字
+fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
+        where T : CharSequence,
+              T : Comparable<T> {
+    return list.filter { it > threshold }.map { it.toString() }
+}
+
+
+// 嵌套类与内部类  嵌套类相当于静态内部类， 内部类要用 inner关键字
+
+
+class Outer {
+
+    class Inner {
+
+        fun foo(): Unit {
+            val inner = Outer.Inner()
+
+        }
+    }
+}
+
+//内部类可以访问外部类
+class Outer1 {
+
+    var a = 1
+
+    inner class Inner1 {
+
+        fun foo(): Unit {
+            print(a)
+            //使用this@label来消除歧义
+            print(this@Outer1.a)
+
+        }
+    }
+
+}
+
+//匿名内部类
+fun foo1(ctx: Context): Unit {
+    View(ctx).setOnClickListener { v ->
+        when (v.id) {
+            1 -> print(1)
+            2 -> print(2)
+        }
+    }
+
+    //匿名内部类
+    View(ctx).setOnClickListener(object : View.OnClickListener {
+        override fun onClick(v: View?) {
+        }
+
+    })
+
+    View(ctx).setOnClickListener(View.OnClickListener { v: View? -> v?.id })
+
+}
+
+
+//枚举类  enum关键字
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+
+
+//对象  object关键字
+
+fun foo2(ctx: Context): Unit {
+    //匿名对象
+    val value: View.OnClickListener = object : View.OnClickListener {
+        override fun onClick(v: View?) {
+        }
+    }
+
+    //自动类型检测
+    View(ctx).setOnClickListener(value)
+
+    //直接没有父类的对象
+    val o1 = object {
+        var a = 1
+    }
+
+    print(o1.a)
+
+}
+
+//这称为对象声明，不能再函数中声明，只能再其他对象声明内 或者 非内部类中
+object Single : View.OnClickListener {
+    override fun onClick(v: View?) {
+    }
+
+    var a = 1
+    fun foo() {
+        print("")
+    }
+}
+
+
+fun foo3(): Unit {
+    //单例
+    Single.foo()
+    Single.onClick(null)
+
+}
+
+
+//伴生对象  companion关键字
+
+class Class2 {
+    companion object Obj {
+        fun foo(): Unit {
+
+        }
+    }
+
+}
+
+fun foo4() {
+    //如果没有 companion ，则要调用 Class.Obj.foo()
+    Class2.foo()
+}
+
+class Class3 {
+    companion object Obj {
+        fun foo(): Unit {
+
+        }
+    }
+
+}
+
+//对象表达式和对象声明之间的语义差异
+// 表达式是创建匿名对象，声明是在类或者顶层声明的
+//一个当时就创建，一个是第一次调用的时候创建，他们不是静态的
+// 要静态需要 @JvmStatic
+
+
+//委托属性 by关键字 ，调用委托属性就是调用指定的那个类？
+
+
+//函数
+// lambda 表达式参数
+
+fun foo5(a: () -> Int): Unit {
+
+    val invoke = a.invoke()
+}
+
+fun foo6(): Unit {
+    foo5 { 1 }
+}
+
+//可变参数 vararg关键字
+
+fun foo7(vararg a: String): Unit {
+    foo7("1", "2")
+
+}
+
+//如果我们已经有一个数组并希望将其内容传给该函数，我们使用伸展（spread）操作符（在数组前面加 *）
+fun foo8(): Unit {
+    foo7(a = *arrayOf("", ""))
+}
+
+
+//请注意，在调用 Java 函数时不能使用命名参数语法，因为 Java 字节码并不总是保留函数参数的名称。
+
+
+//中缀表示法  infix关键字 中缀函数
+
+//它们必须是成员函数或扩展函数；
+//它们必须只有一个参数；
+//其参数不得接受可变数量的参数且不能有默认值。
+
+class Class4 {
+    infix fun foo9(a: Int): Int {
+        return 1 + a
+    }
+}
+
+fun foo10(): Unit {
+    val class4 = Class4()
+    val i = class4 foo9 3 //中缀函数 ，左边是定义函数的类型，右边是参数，中间是函数名
+
+}
+//中缀函数调用的优先级低于算术操作符、类型转换以及 rangeTo 操作符
+//中缀函数调用的优先级高于布尔操作符 && 与 ||、is- 与 in- 检测以及其他一些操作符
+//https://www.kotlincn.net/docs/reference/grammar.html#precedence
+
+// 局部函数，成员函数，泛型函数，内联函数，拓展函数 ，高阶函数和 Lambda 表达式
+// 尾递归函数 tailrec关键字 ,优化递归
+
+
+//在递归调用后有更多代码时，不能使用尾递归，并且不能用在 try/catch/finally 块中。目前尾部递归只在 JVM 后端中支持
+tailrec fun findFixPoint(x: Double = 1.0): Double
+        = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
+
+
+//高阶函数和lambda表达式会带来内存开销，我们用内联函数解决，inline关键字
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
