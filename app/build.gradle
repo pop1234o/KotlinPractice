@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 27
@@ -26,8 +28,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile "com.android.support:multidex:1.0.1"
+
+    // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
+//    provided("com.tinkerpatch.tinker:tinker-android-anno:1.9.8")
+    implementation("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.8")
 }
 repositories {
     mavenCentral()
 }
+
+//http://abcghy.github.io/2017/02/25/Tinker-Patch-Tutorial/
+apply from: 'tinkerpatch.gradle'

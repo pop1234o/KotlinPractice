@@ -1,4 +1,4 @@
-package com.liyafeng.kotlinproject
+package com.liyafeng.kotlinproject.practice
 
 import android.content.Context
 import android.view.View
@@ -192,7 +192,7 @@ class Outer {
     class Inner {
 
         fun foo(): Unit {
-            val inner = Outer.Inner()
+            val inner = Inner()
 
         }
     }
@@ -264,6 +264,7 @@ fun foo2(ctx: Context): Unit {
 }
 
 //这称为对象声明，不能再函数中声明，只能再其他对象声明内 或者 非内部类中
+//对象声明 其实就是一个单例类，我们在java中通过Single.Instance.xxx来访问
 object Single : View.OnClickListener {
     override fun onClick(v: View?) {
     }

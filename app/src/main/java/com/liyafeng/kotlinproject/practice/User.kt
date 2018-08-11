@@ -1,4 +1,4 @@
-package com.liyafeng.kotlinproject
+package com.liyafeng.kotlinproject.practice
 
 //数据类，必须有构造参数，参数必须声明var或者val
 //在 JVM 中，如果要无参的构造函数，则所有的属性必须指定默认值。

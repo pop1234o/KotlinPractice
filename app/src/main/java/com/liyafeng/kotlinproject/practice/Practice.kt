@@ -1,4 +1,4 @@
-package com.liyafeng.kotlinproject
+package com.liyafeng.kotlinproject.practice
 
 class Practice {
 
@@ -554,5 +554,18 @@ class Practice {
 
     //endregion
 
+
+    //region kotlin Android 拓展
+
+    /**
+     * https://www.kotlincn.net/docs/tutorials/android-plugin.html
+     *
+     * 我们直接
+     * apply plugin: 'kotlin-android-extensions'
+     * */
+    fun foo24(): Unit {
+
+    }
+    //endregion
 
 }
