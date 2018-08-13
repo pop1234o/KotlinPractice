@@ -568,4 +568,52 @@ class Practice {
     }
     //endregion
 
+
+    //region 反射
+
+    var x = ""
+    /**
+     * 我们使用 :: 来调用反射
+     * */
+    fun foo25(): Unit {
+
+
+        val kClass = String::class // KClass 类型的值
+        val java = String::class.java //  Java 类引用
+
+
+        val name: String? = ""::class.qualifiedName//对象获取类引用
+
+
+        val kProperty0 = ""::length
+        val length = kProperty0.get();
+
+
+        //函数类型 所有可调用引用的公共超类型是 KCallable<out R>，
+
+
+        listOf(1, 2).filter { i -> i % 2 == 0 }
+        listOf(1, 2).filter { it % 2 == 0 }
+        listOf(1, 2).filter(::isOdd)
+
+
+        ::x.get()  //反射x类型  值为 KProperty<String>  KMutableProperty<String>
+        ::x.name
+
+        //映射
+        listOf("1", "22").map(String::length)
+
+        listOf("1", "22").map { it.length } //it是内置的
+
+        listOf("1", "22").map { s: String -> s.length }
+
+        listOf("1", "22").map { s -> s.length }
+
+
+    }
+
+    fun isOdd(x: Int) = x % 2 != 0
+
+    //endregion
+
 }

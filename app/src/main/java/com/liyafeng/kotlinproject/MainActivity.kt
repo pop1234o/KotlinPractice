@@ -10,6 +10,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * tinker使用
+     * https://itimetraveler.github.io/2016/11/17/【Android】微信热修复%20Tinker%20的集成和使用/
+     *
+     * https://github.com/Tencent/tinker/wiki/Tinker-常见问题
+     *
+     * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
