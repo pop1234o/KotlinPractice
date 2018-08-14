@@ -224,7 +224,12 @@ fun foo1(ctx: Context): Unit {
         }
     }
 
-    //匿名内部类
+    //当名称没用的时候可以命名为_
+    View(ctx).setOnClickListener { _ ->
+        print(2)
+    }
+
+    //匿名内部类,不允许有名称
     View(ctx).setOnClickListener(object : View.OnClickListener {
         override fun onClick(v: View?) {
         }
@@ -372,13 +377,10 @@ fun foo10(): Unit {
 
 
 //在递归调用后有更多代码时，不能使用尾递归，并且不能用在 try/catch/finally 块中。目前尾部递归只在 JVM 后端中支持
-tailrec fun findFixPoint(x: Double = 1.0): Double
-        = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
+tailrec fun findFixPoint(x: Double = 1.0): Double = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
 
 
 //高阶函数和lambda表达式会带来内存开销，我们用内联函数解决，inline关键字
-
-
 
 
 //协程  在 Kotlin 1.1+ 中协程是实验性的

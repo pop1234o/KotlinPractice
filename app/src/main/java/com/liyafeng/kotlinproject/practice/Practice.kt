@@ -616,4 +616,32 @@ class Practice {
 
     //endregion
 
+
+    //region kotlin常用函数  let
+
+    fun foo26(): Unit {
+        var x: String? = null
+        //let中是返回自己的对象，一般可以用来做非空逻辑
+        x?.let { print(it.length) }
+        print(x?.length)
+
+    }
+
+
+    //endregion
+
+
+    //region 常用规则
+
+
+    /**
+    * lambda有多少it如果取值》
+    * */
+    fun foo27(): Unit {
+
+    }
+
+    //endregion
+
+
 }
