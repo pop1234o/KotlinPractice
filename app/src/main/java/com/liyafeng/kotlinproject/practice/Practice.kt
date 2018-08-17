@@ -508,6 +508,15 @@ class Practice {
 
     }
 
+    /**
+     * lambda 表达式
+     * https://juejin.im/entry/58a382da61ff4b0058ab4542
+     * lambda 表达式其实就是函数的简化
+     * */
+    fun foo30(): Unit {
+
+    }
+
     //endregion
 
 

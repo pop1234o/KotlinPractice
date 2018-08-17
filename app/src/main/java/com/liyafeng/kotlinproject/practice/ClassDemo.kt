@@ -2,6 +2,7 @@ package com.liyafeng.kotlinproject.practice
 
 import android.content.Context
 import android.view.View
+import java.util.*
 
 //如果不声明，主构造函数中的参数是val类型的
 // constructor 如果构造函数有注解或可见性修饰符，这个 constructor 关键字是必需的，并且这些修饰符在它前面
@@ -173,7 +174,17 @@ var String.size: Int
 
 //密封类  sealed关键字
 
-//泛型  out ,in 关键字
+//region 泛型  out ,in 关键字 星投影
+
+/**
+ * 星投影
+ * */
+fun foo1(list: ArrayList<*>): Unit {
+    //代表这个list不能写入，读取出来的类型是 Any?  Any是所有kotlin对象的父类
+    val get: Any? = list[1]
+
+}
+//endregion
 
 
 // 如果同一类型参数需要多个上界，我们需要一个单独的 where-子句：  where关键字
