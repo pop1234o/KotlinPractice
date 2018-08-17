@@ -153,7 +153,7 @@ class Practice {
     //endregion
 
 
-    //region 空判断  ?.操作符  Elvis操作符  !!操作符   类型检测及自动类型转换(is操作符 )  as操作符
+    //region 空判断  ?.操作符  Elvis操作符（?:）  !!操作符   类型检测及自动类型转换(is操作符 )  as操作符
 
     fun getInt(): Int? {
         //如果一个 变量 的值可以为null，必须在声明处的类型后面添加 ？ 来标识此变量可以引用为null
@@ -195,14 +195,22 @@ class Practice {
     fun getString() = null
     fun getString1() = null
 
+    /**
+     * Elvis操作符（?:）
+     * */
     fun foo1(node: Practice): String? {
         //Elvis 操作符是返回两侧的值的其中一个
+        //只有左边为null，右边才会执行
         var p = node.getString() ?: "88"
         return p
     }
 
+    /**
+     * Elvis操作符（?:）
+     * */
     fun foo(node: Practice): String? {
         //Elvis 操作符是返回两侧的值的其中一个,这里使用return 来直接返回
+        //
         node.getString() ?: return null
 
     }
@@ -279,7 +287,7 @@ class Practice {
 
             true -> print(3)
 
-            is Practice -> obj.foo11() //obj 是这个类型
+            is Practice -> obj.foo11() //obj 是这个类型,自动转型
 
             in 1..3 -> print(3)  //在这个区间
 
@@ -635,9 +643,98 @@ class Practice {
 
 
     /**
-    * lambda有多少it如果取值》
-    * */
+     * lambda有多个it如何取值》
+     *
+     * ===================
+     * 初始化，可以用init,也可以直接写在参数上
+     * 因为kotlin初始是调用构造函数，然后是init，然后是成员变量（这个看代码顺序来执行）
+     *
+     *  ========构造函数=====
+     *  有主次之分，次必须最终委托给主
+     *
+     * ======tag强转=========
+     * 我们用is判断完了后，我们要用as进行转换，因为判断完了后tag还是会改变的，所以
+     * 不能保证安全，要用as转完，然后将引用给一个值，然后就可以使用了，因为as转
+     * 不成功是会报错的 或者用as?
+     *
+     * ======static方法 静态方法的几种写法==========
+     * object A{
+     *  @JvmStatic
+     *  fun get(){}
+     * }
+     *
+     * class A privite constructor(context Context){
+     *       companion object{
+     *          fun get(){
+     *          ....
+     *          }
+     *       }
+     * }
+     *
+     *
+     * ========可null属性声明(逻辑上避免空指针)=====
+     * var instance: VerifyUtil? = null
+     * 必须指明类型，而且初始化null
+     *
+     * =========设置属性=====
+     *  private val userApiStore: UserApiStore
+     *  get() {
+     *  var dataRepository: UserApiStore = MineDataRepository()
+     *      return dataRepository
+     *   }
+     * 这个每次调用 userApiStore都会new一个出来
+     *
+     * ===========匿名内部类===========
+     * 如果这个类没有参数那么可以直接用{} 代替
+     * xx.setCallBack{
+     *
+     * }
+     *
+     * 如果有一个参数那么就默认it
+     * xx.setCallBack{
+     *   print(it.toString)
+     * }
+     *
+     *
+     * ========内部接口定义=======
+     *
+     * class AAA {
+
+    private var callback: OnCallback? = null //在非构造函数中初始化，都得是？类型
+
+    interface OnCallback {
+    fun func(s: String)
+    }
+
+    fun setLIns(callback: OnCallback) {
+
+    this.callback = callback
+    }
+    }
+
+     *
+     * =============参数类型自动联想====
+     * onClickListener 很给力
+     *
+     *
+     *
+     *
+     * */
     fun foo27(): Unit {
+
+    }
+
+
+    /**
+     * kotlin java 互转
+     * Code - Convert Java File To Kotlin File
+
+    Kotlikn 转 Java
+
+    Tools>Kotlin>Show Kotlin Bytecode
+    Decompile
+     * */
+    fun foo28(): Unit {
 
     }
 

@@ -29,7 +29,7 @@ class ClassDemo private constructor(name: String, var count: Int) {
 
 
     //次构造函数 如果类有一个主构造函数，每个次构造函数需要委托给主构造函数
-
+    //有主构造函数，那么次构造函数必须委托给主构造，不能直接委托给父类
     constructor(num: Double = 0.0) : this("", 1) {
         print(num)
 
@@ -247,7 +247,12 @@ enum class Direction {
 }
 
 
-//对象  object关键字
+//对象  object关键字 ,可以用来声明单例，可以当匿名内部类，
+// 可以做伴生对象(就是静态内部类,这个编译出来是这个类创建一个实例，
+// 那么伴生对象就会创建一个实例，而且是static的，
+// class中没有静态方法，那么使用伴生对象是静态的，然后再调用里面的方法
+// 就好像是调用静态方法一样，但其实调用的是静态伴生对象的非静态方法
+// )，
 
 fun foo2(ctx: Context): Unit {
     //匿名对象
