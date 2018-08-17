@@ -30,7 +30,11 @@ class Practice {
     fun printSum2(x: Int, y: Int) = print(x + y)
 
 
-    //自定义类的函数
+    /**
+     * 拓展函数
+     * 这个在类内声明，只能再类内用
+     * 在file声明，可以在包内用，包外用要import
+     */
     fun String.happy() {
 
         toString() + "ss"

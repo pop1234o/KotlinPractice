@@ -336,7 +336,11 @@ class Class3 {
 // 要静态需要 @JvmStatic
 
 
-//委托属性 by关键字 ，调用委托属性就是调用指定的那个类？
+//region  委托属性 by关键字 ，调用委托属性就是调用指定的那个类？
+/**
+ *  https://www.kotlincn.net/docs/reference/delegated-properties.html
+ * */
+//endregion
 
 
 //函数
