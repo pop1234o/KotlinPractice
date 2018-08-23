@@ -729,7 +729,12 @@ class Practice {
      * =============参数类型自动联想====
      * onClickListener 很给力
      *
+     * =============kotlin的函数类型也很给力============
+     * 之前我们要写个接口，然后定义方法
+     * 然后写回调，现在我们直接将函数类型作为参数
+     * var listener: (data: RankInfoEntity) -> Unit
      *
+     * listener(data)
      *
      *
      * */

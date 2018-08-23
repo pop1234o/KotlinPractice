@@ -77,8 +77,23 @@ class MyView1(context: Context) : View(context) {
 }
 
 
-// 属性，getter setter自定义   field关键字-幕后字段  const关键字-常量
-// lateinit 延迟初始化属性与变量
+//
+//
+
+//region  属性，getter setter自定义   field关键字-幕后字段  const关键字-常量 lateinit关键字
+
+
+/**
+ * lateinit不能用于原始类型
+ *
+ *
+ * */
+fun foo0(): Unit {
+
+}
+//endregio
+
+
 class FieldClass {
 
 }
@@ -248,6 +263,12 @@ fun foo1(ctx: Context): Unit {
     })
 
     View(ctx).setOnClickListener(View.OnClickListener { v: View? -> v?.id })
+
+    //直接写类名{} ,而且不写参数类型，因为只有一个
+    View(ctx).setOnClickListener(View.OnClickListener { view -> view.id })
+
+    //直接类名省略
+    View(ctx).setOnClickListener({ view -> view.id })
 
 }
 
