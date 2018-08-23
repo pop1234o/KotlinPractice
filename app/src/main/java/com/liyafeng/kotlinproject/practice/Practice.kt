@@ -732,9 +732,35 @@ class Practice {
      * =============kotlin的函数类型也很给力============
      * 之前我们要写个接口，然后定义方法
      * 然后写回调，现在我们直接将函数类型作为参数
-     * var listener: (data: RankInfoEntity) -> Unit
+     * fun1(var listener: (data: RankInfoEntity) -> Unit){
      *
      * listener(data)
+     *
+     * }
+     *
+     *
+     * 而在那边 我们直接  fun1({ it.toString//这就是传入的data })
+     *
+     *
+     * ========lambda创建接口类型的匿名内部类=====
+     *
+     * var listener = OnNetWorkErrorListener {fun()}
+     *
+     * 代表里面一个方法，而且没有参数
+     *
+     *
+     * ===========when做表达式==============
+     *   return when (position) {
+     * 0 -> {
+     * "进行中"
+     * }
+     * 1 -> {
+     * "停止买入"
+     * }
+     * else -> {
+     * "已结束"
+     *    }
+     *
      *
      *
      * */
