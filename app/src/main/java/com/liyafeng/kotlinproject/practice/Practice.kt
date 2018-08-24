@@ -761,6 +761,22 @@ class Practice {
      * "已结束"
      *    }
      *
+     * ===============kotlin的char ================
+     *  val c = '\u0000'
+     *  相当于java 的 char c ='\0'
+     *
+     *  ===========kotlin中的val和const=======
+     *  var 会生成getter, setter
+     *  val 只会生成getter,我们可以重写 getter方法
+     *  val currentTime:Long
+     *      get(){return System.currentTimeMillis()}
+     *  每次currentTime都是不一样的，所以val并不是常量，而是不可写
+     *
+     *  kotlin中的定义常量有两种
+     *  一个是用const修饰 val ，这样编译器禁止生成getter对象
+     *  const只能用在顶层文件，或者object中，
+     *  一个是@JvmField
+     *  @JvmField val NAME = "89757
      *
      *
      * */
