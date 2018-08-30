@@ -778,6 +778,11 @@ class Practice {
      *  一个是@JvmField
      *  @JvmField val NAME = "89757
      *
+     * ================envnsi操作符======
+     * 我们可以用?:来少些if return 的判断
+     *
+     *  val data = intent.data?.toString() ?: return
+     *  如果前面表达式为null，后面直接返回
      *
      * */
     fun foo27(): Unit {
