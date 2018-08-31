@@ -784,6 +784,11 @@ class Practice {
      *  val data = intent.data?.toString() ?: return
      *  如果前面表达式为null，后面直接返回
      *
+     *  ==============!!操作符==============
+     *  当我们一个参数是非空的时候，我们的参数是？类型
+     *  那么我们就不能传入，这时我们用 fun(xxx!!)来传入
+     *  但是如果是null则抛出异常
+     *
      * */
     fun foo27(): Unit {
 
