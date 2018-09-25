@@ -795,8 +795,34 @@ class Practice {
      *  }
      *
      *  =================拓展函数位置===
-     *  只能定义在package或object
+     *  只能定义在package或object,才能在其他类中使用，要
+     *  import 包名.拓展函数名
      *  否则定义在类中只能在本类中用
+     *
+     *
+     *  ==============几个通用的函数==============
+     *  https://www.jianshu.com/p/5c4a954d2b2c
+     *  -------------let--------------
+     *      let ,有返回值，返回值就是函数定义的类型
+     *    private fun setTop(index: Int, bean: RankInfoEntity.ListBean?):Int {
+         bean?.let{
+            print(it)
+             return 1
+                }
+            bean.toString() //不能执行
+            }
+
+     * 其实就是配合?使用防止null
+     *----------------apply------
+     * 这个就是返回值是其本身
+     *
+     * --------------run---------
+     * run和apply差不多，run的返回值是最后一行，如果没有就是Unit
+     * =----------also---------
+     * 和apply一样，只是also有参数，it,而apply使用this或者直接调用函数
+     *
+     * --------takeIF  /takeUnless---------
+     * it参数，返回boolean值，如果true返回this，否则返回null
      *
      *
      * */
