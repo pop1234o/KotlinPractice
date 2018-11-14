@@ -221,7 +221,7 @@ class Practice {
 
 
     fun foo2(s: String?) {
-        //s有可能为null，如果我们想调用的时候抛出一个NPE异常，那么我们就使用它（好像没什么意义。。。）
+        //s有可能为null，如果我们想调用的时候抛出一个NPE异常，那么我们就使用它（如果要走异常处理流程）
         print(s!!.length)
     }
 
@@ -844,6 +844,21 @@ class Practice {
 
     }
 
+    /**
+    * @JvmOverloads 注解
+     * https://www.jianshu.com/p/72d1959a7c56
+    * */
+    fun foo29(){
+
+        /*
+        * 这个注解对应java中的方法重载
+        * 同一个函数名，参数列表不同
+        * 因为kotlin中有参数的默认值，那么编译成java就是，有几个默认参数，就编译成几个函数
+        * 如果传入的参数少，那么会调用参数多的方法，并传入默认值
+        *
+        * 如果不加这个，在java中只能看到最多参数的那个方法
+        * */
+    }
     //endregion
 
 

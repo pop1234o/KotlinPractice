@@ -9,11 +9,14 @@ import java.util.*
 // private修饰 构造函数可见性
 
 //在 JVM 上，如果主构造函数的所有的参数都有默认值，编译器会生成 一个额外的无参构造函数，它将使用默认值
+//如果加上var 或者val这个值就变成成员变量，否则只能在init里用
+//init代码就是构造参数的代码
 class ClassDemo private constructor(name: String, var count: Int) {
 
     var s = "this is $name"
 
     init {
+
         print(name.length)
         count = 5
 //        print(s2)//这个时候s2还没有初始化
@@ -34,11 +37,16 @@ class ClassDemo private constructor(name: String, var count: Int) {
     constructor(num: Double = 0.0) : this("", 1) {
         print(num)
 
+
     }
 
     //通过别的次构造函数间接委托
     constructor(n: String) : this(1.0) {
         print(n)
+    }
+
+    fun print(){
+        print(count)//能访问count，但是不能访问name
     }
 }
 

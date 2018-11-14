@@ -29,7 +29,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile "com.android.support:multidex:1.0.1"
+    implementation "com.android.support:multidex:1.0.1"
 
     // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
 //    provided("com.tinkerpatch.tinker:tinker-android-anno:1.9.8")
