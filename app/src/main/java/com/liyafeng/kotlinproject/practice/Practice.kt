@@ -675,7 +675,7 @@ class Practice {
      *  @JvmStatic
      *  fun get(){}
      * }
-     *
+     * //半生对象是静态的，但里面的方法不是
      * class A privite constructor(context Context){
      *       companion object{
      *          fun get(){
