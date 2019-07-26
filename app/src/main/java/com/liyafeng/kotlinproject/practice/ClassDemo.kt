@@ -4,6 +4,53 @@ import android.content.Context
 import android.view.View
 import java.util.*
 
+
+/**
+ * ==============可见性修饰符===========
+ * 类、对象、接口、构造函数、方法、属性和它们的 setter 都可以有 可见性修饰符
+ *
+ *
+ *
+ *
+ * 在 Kotlin 中有这四个可见性修饰符：
+ * private、 文件内可见
+ * protected、
+ * internal 模块内可见
+ * public。
+ * 如果没有显式指定修饰符的话，默认可见性是 public。
+ *
+ * -----internal----
+ * 一个模块是编译在一起的一套 Kotlin 文件：
+
+一个 IntelliJ IDEA 模块；
+一个 Maven 项目；
+一个 Gradle 源集（例外是 test 源集可以访问 main 的 internal 声明）；
+一次 <kotlinc> Ant 任务执行所编译的一套文件。
+ *
+ * -------构造函数的修饰符-----
+ * 构造函数的修饰符
+ * class C private constructor(a: Int) { …… }
+ *
+ * 默认情况下，所有构造函数都是 public，这实际上等于类可见的地方它就可见
+ *
+ * ===========顶层声明===============
+ * 就是直接在文件内声明
+ * package foo
+ *  fun baz() { ... }
+ *  class Bar { ... }
+ *  函数、属性和类、对象和接口可以在顶层声明
+ *
+ * protected 不适用于顶层声明。因为他只有在有继承的地方出现
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
+
+
+//============类的定义==============
 //如果不声明，主构造函数中的参数是val类型的
 // constructor 如果构造函数有注解或可见性修饰符，这个 constructor 关键字是必需的，并且这些修饰符在它前面
 // private修饰 构造函数可见性
@@ -11,6 +58,7 @@ import java.util.*
 //在 JVM 上，如果主构造函数的所有的参数都有默认值，编译器会生成 一个额外的无参构造函数，它将使用默认值
 //如果加上var 或者val这个值就变成成员变量，否则只能在init里用
 //init代码就是构造参数的代码
+
 class ClassDemo private constructor(name: String, var count: Int) {
 
     var s = "this is $name"
@@ -45,7 +93,7 @@ class ClassDemo private constructor(name: String, var count: Int) {
         print(n)
     }
 
-    fun print(){
+    fun print() {
         print(count)//能访问count，但是不能访问name
     }
 }
@@ -58,18 +106,31 @@ class Example
 
 
 //open声明这个类可以被继承，默认情况下，在 Kotlin 中所有的类都是 final
+//open和java中final对应，kotlin默认都是final的类和方法，如果要被继承或者重写，需要open关键字
 open class BaseClass {
     open fun a1() = 1
     fun a2() = 1 //如果不写open ，这个函数默认是final的
+
+    private fun a3() = 2
+
+    protected open fun a4() = 2
 }
 
 class SubClass : BaseClass() {
     //实现空的构造函数
 
     //标记为 override 的成员本身是开放的，也就是说，它可以在子类中覆盖。如果你想禁止再次覆盖，使用 final
+    //因为是覆盖 所以必须要override
     override fun a1() = 3 //不写override会报错
 
+    //报错，因为父类是final类型的
 //    override fun a2() = 1
+
+    //私有的不会报错
+    fun a3() = 4
+
+    override fun a4() = 5
+
 
 }
 

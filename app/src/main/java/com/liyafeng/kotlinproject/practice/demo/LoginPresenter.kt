@@ -1,4 +1,4 @@
-package com.liyafeng.kotlinproject.practice
+package com.liyafeng.kotlinproject.practice.demo
 
 
 //这个就是 子类名称，构造函数，父类名称《泛型具体类型》（父类构造函数中的参数）这个yao

@@ -30,6 +30,7 @@ class StaticMethod{
         fun doSome()=3
 
 
+
     }
 
 }
