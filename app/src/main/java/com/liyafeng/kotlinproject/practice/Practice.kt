@@ -1,5 +1,11 @@
 package com.liyafeng.kotlinproject.practice
 
+
+//kotlin的main需要写到类外面
+fun main(args: Array<String>) {
+    Practice().ss();
+}
+
 class Practice {
 
 
@@ -22,8 +28,21 @@ class Practice {
     }
 
     //无返回值可以不写
-    fun printSum1(x: Int, y: Int) {
+    // 和 默认参数  最后一个参数是 lambda 表达式
+    //  () -> Unit代表
+    fun printSum1(x: Int = 0, y: Int = 0, qux: () -> Unit) {
         print(x + y);
+
+        //使用默认参数
+        printSum1() { print(1) }
+
+        //指定参数 ，必须加{} 这代表一个函数块，没有返回值
+        printSum1(y = 1, qux = { print(1) });
+
+        //最后一个参数是 lambda 表达式 ， 那么它既可以作为命名参数在括号内传入，也可以在括号外传入：
+        printSum1 { print(1) };
+
+
     }
 
     //返回Unit
@@ -41,6 +60,7 @@ class Practice {
 
         "ss".happy()
     }
+
     //endregion
 
 
@@ -93,12 +113,13 @@ class Practice {
 
         //直接在字符串中调用函数
         val s1 = "${s.replace("s", "a")} is good"
-        print(s1)
+        println(s1)
 
         val s2 = "${a.plus(10.0)} is very good"
-        print(s2)
+        println(s2)
 
-
+        val s3 = "${1 + 1} is very good"
+        println(s3)
     }
 
     fun foo14() {
@@ -513,9 +534,7 @@ class Practice {
     }
 
     /**
-     * lambda 表达式
-     * https://juejin.im/entry/58a382da61ff4b0058ab4542
-     * lambda 表达式其实就是函数的简化
+     *
      * */
     fun foo30(): Unit {
 
@@ -805,12 +824,12 @@ class Practice {
      *  -------------let--------------
      *      let ,有返回值，返回值就是函数定义的类型
      *    private fun setTop(index: Int, bean: RankInfoEntity.ListBean?):Int {
-         bean?.let{
-            print(it)
-             return 1
-                }
-            bean.toString() //不能执行
-            }
+    bean?.let{
+    print(it)
+    return 1
+    }
+    bean.toString() //不能执行
+    }
 
      * 其实就是配合?使用防止null
      *----------------apply------
@@ -845,10 +864,10 @@ class Practice {
     }
 
     /**
-    * @JvmOverloads 注解
+     * @JvmOverloads 注解
      * https://www.jianshu.com/p/72d1959a7c56
-    * */
-    fun foo29(){
+     * */
+    fun foo29() {
 
         /*
         * 这个注解对应java中的方法重载
