@@ -10,6 +10,12 @@ class Practice {
 
 
     //region 定义函数，拓展函数
+    /*
+    * 在 Kotlin 中函数可以在文件顶层声明，这意味着你不需要像一些语言如 Java、C# 或 Scala 那样需要创建一个类来保存一个函数。
+    * 此外除了顶层函数，Kotlin 中函数也可以声明在局部作用域、作为成员函数以及扩展函数。
+    *
+    *
+    * */
 
 
     fun sum(x: Int, y: Int): Int {
@@ -29,7 +35,7 @@ class Practice {
 
     //无返回值可以不写
     // 和 默认参数  最后一个参数是 lambda 表达式
-    //  () -> Unit代表
+    //  () -> Unit代表 一个函数对象，()是参数列表 Unit是返回值，中间用箭头连接
     fun printSum1(x: Int = 0, y: Int = 0, qux: () -> Unit) {
         print(x + y);
 
@@ -49,6 +55,27 @@ class Practice {
     fun printSum2(x: Int, y: Int) = print(x + y)
 
 
+    //可变参数
+    fun fooArg(vararg strings: String) {
+
+        fooArg("1", "2", "3")
+
+        fooArg(*arrayOf("1", "2"))
+    }
+
+    //泛型方法  fun后声明泛型，后面可以使用了
+    fun <T> fooArgs(vararg string: T): List<T> {
+
+        val arrayList = ArrayList<T>();
+        for (s in string) {
+            arrayList.add(s);
+        }
+        return arrayList;
+
+
+    }
+
+
     /**
      * 拓展函数
      * 这个在类内声明，只能再类内用
@@ -59,6 +86,18 @@ class Practice {
         toString() + "ss"
 
         "ss".happy()
+    }
+
+    //中缀函数
+    //1它们必须是成员函数或扩展函数；
+    //2它们必须只有一个参数；
+    //3其参数不得接受可变数量的参数且不能有默认值。
+    infix fun Int.add(x: Int): Int {
+
+        //这里在别处调用
+        val i = 1 add 2;
+
+        return this + x;
     }
 
     //endregion
