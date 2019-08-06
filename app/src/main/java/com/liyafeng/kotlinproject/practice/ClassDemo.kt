@@ -149,7 +149,7 @@ class MyView1(context: Context) : View(context) {
 //
 //
 
-//region  属性，getter setter自定义   field关键字-幕后字段  const关键字-常量 lateinit关键字
+// region  属性，getter setter自定义   field关键字-幕后字段  const关键字-常量 lateinit关键字
 
 
 /**
@@ -160,7 +160,7 @@ class MyView1(context: Context) : View(context) {
 fun foo0(): Unit {
 
 }
-//endregio
+// endregion
 
 
 class FieldClass {
