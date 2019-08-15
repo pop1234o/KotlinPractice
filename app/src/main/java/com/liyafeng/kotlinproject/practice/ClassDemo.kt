@@ -503,6 +503,24 @@ tailrec fun findFixPoint(x: Double = 1.0): Double = if (x == Math.cos(x)) x else
 
 
 
+//抽象类，抽象方法，抽象成员变量
+abstract class Father{
+    protected abstract val layoutId: Int
+
+    abstract fun getLayout(): Int
+}
+
+
+class Son:Father(){
+    override fun getLayout(): Int {
+        return 1
+    }
+
+    override val layoutId: Int
+        get() = 1
+
+}
+
 
 
 

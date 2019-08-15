@@ -820,7 +820,33 @@ class Practice {
          *
          * }
          *
+         * 如果是object内的val
          *
+         * object AppUtil {
+         *       val mainHandler = Handler(Looper.getMainLooper())
+         * }
+         *
+         * 那么
+         *
+         * public final class AppUtil {
+         * @NotNull
+         * private static final Handler mainHandler; //私有静态变量
+         * public static final AppUtil INSTANCE;
+         *
+         * @NotNull
+         * public final Handler getMainHandler() { //通过共有方法访问
+         * return mainHandler;
+         * }
+         *
+         * private AppUtil() {
+         * }
+         *
+         * static {
+         *      AppUtil var0 = new AppUtil();
+         *      INSTANCE = var0;
+         *      mainHandler = new Handler(Looper.getMainLooper());
+         *      }
+         * }
          *
          *
          *
