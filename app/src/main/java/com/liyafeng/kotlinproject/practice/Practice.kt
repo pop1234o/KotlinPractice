@@ -711,254 +711,331 @@ class Practice {
             num = 3
 
 
+        }
+
+
+        //endregion
+
+
+        //region 常用规则
+
+
+        /**
+         * lambda有多个it如何取值》
+         *
+         * ===================
+         * 初始化，可以用init,也可以直接写在参数上
+         * 因为kotlin初始是调用构造函数，然后是init，然后是成员变量（这个看代码顺序来执行）
+         *
+         *  ========构造函数=====
+         *  有主次之分，次必须最终委托给主
+         *
+         * ======tag强转=========
+         * 我们用is判断完了后，我们要用as进行转换，因为判断完了后tag还是会改变的，所以
+         * 不能保证安全，要用as转完，然后将引用给一个值，然后就可以使用了，因为as转
+         * 不成功是会报错的 或者用as?
+         *
+         * ======static方法 静态方法的几种写法==========
+         * //@JvmStatic  这个注解只能用在 object xx{} 或者 companion onject中
+         *
+         * object A{
+         *  @JvmStatic
+         *  fun get(){}
+         * }
+         * //半生对象是静态的，但里面的方法不是
+         *
+         * class A privite constructor(context Context){
+         *
+         *       companion object{
+         *          fun get(){
+         *          ....
+         *          }
+         *       }
+         *
+         * }
+         *
+         * //如果想生成一个静态方法
+         *
+         *  class A privite constructor(context Context){
+         *
+         *       companion object{
+         *          @JvmStatic //这里会给class A生成一个同名静态方法，里面调用的事（静态）伴生对象的实例方法
+         *          fun get(){
+         *          ....
+         *          }
+         *       }
+         *
+         * }
+         *
+         * ===========静态变量===========
+         * class A{
+         *   companion object {
+         *      val MIN_CLICK_DELAY_TIME = 800
+         *  }
+         * }
+         *
+         * 这样在A中
+         * private static final int MIN_CLICK_DELAY_TIME = 800;
+         *
+         * 伴生对象中
+         *
+         *  public static final class Companion {
+         *      public final int getMIN_CLICK_DELAY_TIME() {
+         *          return A.MIN_CLICK_DELAY_TIME;
+         *       }
+         *   }
+         *
+         *
+         * ---------val-------------
+         * 如果是 类内的
+         * val MIN_CLICK_DELAY_TIME = 800
+         * 生成final非静态变量
+         * private final int MIN_CLICK_DELAY_TIME = 800;
+         *
+         * val用public修饰无效，依然生成private的
+         *
+         *
+         * 如果是包内的val
+         * val ARG_1 = "1"
+         *  const val ARG_2 = "2"
+         *
+         *  private val ARG_3 = "3"
+         *  private const val ARG_4 = "4"
+         *
+         * 会生成
+         * public final class Akt {
+         *   @NotNull
+         *   private static final String ARG_1 = "1";//val 私有静态 ,但是用getter方法
+         *   @NotNull
+         *   public static final String getARG_1() {
+         *   return ARG_1;
+         *   }
+         *
+         *   @NotNull
+         *   public static final String ARG_2 = "2"; //const 共有静态
+         *
+         *   private static final String ARG_3 = "3"; // 带private都是私有静态
+         *   private static final String ARG_4 = "4"; //
+         *
+         *
+         * }
+         *
+         *
+         *
+         *
+         *
+         *
+         *
+         * ========可null属性声明(逻辑上避免空指针)=====
+         * var instance: VerifyUtil? = null
+         * 必须指明类型，而且初始化null
+         *
+         * =========设置属性=====
+         *  private val userApiStore: UserApiStore
+         *  get() {
+         *  var dataRepository: UserApiStore = MineDataRepository()
+         *      return dataRepository
+         *   }
+         * 这个每次调用 userApiStore都会new一个出来
+         *
+         * ===========匿名内部类===========
+         * 如果这个类没有参数那么可以直接用{} 代替
+         * xx.setCallBack{
+         *
+         * }
+         *
+         * 如果有一个参数那么就默认it
+         * xx.setCallBack{
+         *   print(it.toString)
+         * }
+         *
+         *
+         * ========内部接口定义=======
+         *
+         * class AAA {
+
+        private var callback: OnCallback? = null //在非构造函数中初始化，都得是？类型
+
+        interface OnCallback {
+        fun func(s: String)
+        }
+
+        fun setLIns(callback: OnCallback) {
+
+        this.callback = callback
+        }
+        }
+
+         *
+         * =============参数类型自动联想====
+         * onClickListener 很给力
+         *
+         * =============kotlin的函数类型也很给力============
+         * 之前我们要写个接口，然后定义方法
+         * 然后写回调，现在我们直接将函数类型作为参数
+         * fun1(var listener: (data: RankInfoEntity) -> Unit){
+         *
+         * listener(data)
+         *
+         * }
+         *
+         *
+         * 而在那边 我们直接  fun1({ it.toString//这就是传入的data })
+         *
+         *
+         * ========lambda创建接口类型的匿名内部类=====
+         *
+         * var listener = OnNetWorkErrorListener {fun()}
+         *
+         * 代表里面一个方法，而且没有参数
+         *
+         *
+         * ===========when做表达式==============
+         *   return when (position) {
+         * 0 -> {
+         * "进行中"
+         * }
+         * 1 -> {
+         * "停止买入"
+         * }
+         * else -> {
+         * "已结束"
+         *    }
+         *
+         * ===============kotlin的char ================
+         *  val c = '\u0000'
+         *  相当于java 的 char c ='\0'
+         *
+         *  ===========kotlin中的val和const=======
+         *  var 会生成getter, setter
+         *  val 只会生成getter,我们可以重写 getter方法
+         *  val currentTime:Long
+         *      get(){return System.currentTimeMillis()}
+         *  每次currentTime都是不一样的，所以val并不是常量，而是不可写
+         *
+         *  =========kotlin 定义常量有两种==========
+         *  一个是用const修饰 val ，这样编译器禁止生成getter对象
+         *  const只能用在顶层文件，或者object中，
+         *  一个是@JvmField
+         *  @JvmField val NAME = "89757
+         *
+         * ================envnsi操作符======
+         * 我们可以用?:来少些if return 的判断
+         *
+         *  val data = intent.data?.toString() ?: return
+         *  如果前面表达式为null，后面直接返回
+         *
+         *  ==============!!操作符==============
+         *  当我们一个参数是非空的时候，我们的参数是？类型
+         *  那么我们就不能传入，这时我们用 fun(xxx!!)来传入
+         *  但是如果是null则抛出异常
+         *  ===========object 匿名内部类====
+         *
+         *  var o = object:XXX(){
+         *
+         *  }
+         *
+         *  =================拓展函数位置===
+         *  只能定义在package或object,才能在其他类中使用，要
+         *  import 包名.拓展函数名
+         *  否则定义在类中只能在本类中用
+         *
+         *
+         *  ==============几个通用的函数==============
+         *  https://www.jianshu.com/p/5c4a954d2b2c
+         *  -------------let--------------
+         *      let ,有返回值，返回值就是函数定义的类型
+         *    private fun setTop(index: Int, bean: RankInfoEntity.ListBean?):Int {
+        bean?.let{
+        print(it)
+        return 1
+        }
+        bean.toString() //不能执行
+        }
+
+         * 其实就是配合?使用防止null
+         *----------------apply------
+         * 这个就是返回值是其本身
+         *
+         * --------------run---------
+         * run和apply差不多，run的返回值是最后一行，如果没有就是Unit
+         * =----------also---------
+         * 和apply一样，只是also有参数，it,而apply使用this或者直接调用函数
+         *
+         * --------takeIF  /takeUnless---------
+         * it参数，返回boolean值，如果true返回this，否则返回null
+         *
+         *
+         * */
+        fun foo27(): Unit {
+
+        }
+
+
+        /**
+         * kotlin java 互转
+         * Code - Convert Java File To Kotlin File
+
+        Kotlikn 转 Java
+
+        Tools>Kotlin>Show Kotlin Bytecode
+        Decompile
+         * */
+        fun foo28(): Unit {
+
+        }
+
+        /**
+         * @JvmOverloads 注解
+         * https://www.jianshu.com/p/72d1959a7c56
+         * */
+        fun foo29() {
+
+            /*
+            * 这个注解对应java中的方法重载
+            * 同一个函数名，参数列表不同
+            * 因为kotlin中有参数的默认值，那么编译成java就是，有几个默认参数，就编译成几个函数
+            * 如果传入的参数少，那么会调用参数多的方法，并传入默认值
+            *
+            * 如果不加这个，在java中只能看到最多参数的那个方法
+            * */
+        }
+        //endregion
+
+
     }
-
-
-    //endregion
-
-
-    //region 常用规则
-
-
-    /**
-     * lambda有多个it如何取值》
-     *
-     * ===================
-     * 初始化，可以用init,也可以直接写在参数上
-     * 因为kotlin初始是调用构造函数，然后是init，然后是成员变量（这个看代码顺序来执行）
-     *
-     *  ========构造函数=====
-     *  有主次之分，次必须最终委托给主
-     *
-     * ======tag强转=========
-     * 我们用is判断完了后，我们要用as进行转换，因为判断完了后tag还是会改变的，所以
-     * 不能保证安全，要用as转完，然后将引用给一个值，然后就可以使用了，因为as转
-     * 不成功是会报错的 或者用as?
-     *
-     * ======static方法 静态方法的几种写法==========
-     * object A{
-     *  @JvmStatic
-     *  fun get(){}
-     * }
-     * //半生对象是静态的，但里面的方法不是
-     * class A privite constructor(context Context){
-     *       companion object{
-     *          fun get(){
-     *          ....
-     *          }
-     *       }
-     * }
-     *
-     *
-     * ========可null属性声明(逻辑上避免空指针)=====
-     * var instance: VerifyUtil? = null
-     * 必须指明类型，而且初始化null
-     *
-     * =========设置属性=====
-     *  private val userApiStore: UserApiStore
-     *  get() {
-     *  var dataRepository: UserApiStore = MineDataRepository()
-     *      return dataRepository
-     *   }
-     * 这个每次调用 userApiStore都会new一个出来
-     *
-     * ===========匿名内部类===========
-     * 如果这个类没有参数那么可以直接用{} 代替
-     * xx.setCallBack{
-     *
-     * }
-     *
-     * 如果有一个参数那么就默认it
-     * xx.setCallBack{
-     *   print(it.toString)
-     * }
-     *
-     *
-     * ========内部接口定义=======
-     *
-     * class AAA {
-
-    private var callback: OnCallback? = null //在非构造函数中初始化，都得是？类型
-
-    interface OnCallback {
-    fun func(s: String)
-    }
-
-    fun setLIns(callback: OnCallback) {
-
-    this.callback = callback
-    }
-    }
-
-     *
-     * =============参数类型自动联想====
-     * onClickListener 很给力
-     *
-     * =============kotlin的函数类型也很给力============
-     * 之前我们要写个接口，然后定义方法
-     * 然后写回调，现在我们直接将函数类型作为参数
-     * fun1(var listener: (data: RankInfoEntity) -> Unit){
-     *
-     * listener(data)
-     *
-     * }
-     *
-     *
-     * 而在那边 我们直接  fun1({ it.toString//这就是传入的data })
-     *
-     *
-     * ========lambda创建接口类型的匿名内部类=====
-     *
-     * var listener = OnNetWorkErrorListener {fun()}
-     *
-     * 代表里面一个方法，而且没有参数
-     *
-     *
-     * ===========when做表达式==============
-     *   return when (position) {
-     * 0 -> {
-     * "进行中"
-     * }
-     * 1 -> {
-     * "停止买入"
-     * }
-     * else -> {
-     * "已结束"
-     *    }
-     *
-     * ===============kotlin的char ================
-     *  val c = '\u0000'
-     *  相当于java 的 char c ='\0'
-     *
-     *  ===========kotlin中的val和const=======
-     *  var 会生成getter, setter
-     *  val 只会生成getter,我们可以重写 getter方法
-     *  val currentTime:Long
-     *      get(){return System.currentTimeMillis()}
-     *  每次currentTime都是不一样的，所以val并不是常量，而是不可写
-     *
-     *  kotlin中的定义常量有两种
-     *  一个是用const修饰 val ，这样编译器禁止生成getter对象
-     *  const只能用在顶层文件，或者object中，
-     *  一个是@JvmField
-     *  @JvmField val NAME = "89757
-     *
-     * ================envnsi操作符======
-     * 我们可以用?:来少些if return 的判断
-     *
-     *  val data = intent.data?.toString() ?: return
-     *  如果前面表达式为null，后面直接返回
-     *
-     *  ==============!!操作符==============
-     *  当我们一个参数是非空的时候，我们的参数是？类型
-     *  那么我们就不能传入，这时我们用 fun(xxx!!)来传入
-     *  但是如果是null则抛出异常
-     *  ===========object 匿名内部类====
-     *
-     *  var o = object:XXX(){
-     *
-     *  }
-     *
-     *  =================拓展函数位置===
-     *  只能定义在package或object,才能在其他类中使用，要
-     *  import 包名.拓展函数名
-     *  否则定义在类中只能在本类中用
-     *
-     *
-     *  ==============几个通用的函数==============
-     *  https://www.jianshu.com/p/5c4a954d2b2c
-     *  -------------let--------------
-     *      let ,有返回值，返回值就是函数定义的类型
-     *    private fun setTop(index: Int, bean: RankInfoEntity.ListBean?):Int {
-    bean?.let{
-    print(it)
-    return 1
-    }
-    bean.toString() //不能执行
-    }
-
-     * 其实就是配合?使用防止null
-     *----------------apply------
-     * 这个就是返回值是其本身
-     *
-     * --------------run---------
-     * run和apply差不多，run的返回值是最后一行，如果没有就是Unit
-     * =----------also---------
-     * 和apply一样，只是also有参数，it,而apply使用this或者直接调用函数
-     *
-     * --------takeIF  /takeUnless---------
-     * it参数，返回boolean值，如果true返回this，否则返回null
-     *
-     *
-     * */
-    fun foo27(): Unit {
-
-    }
-
-
-    /**
-     * kotlin java 互转
-     * Code - Convert Java File To Kotlin File
-
-    Kotlikn 转 Java
-
-    Tools>Kotlin>Show Kotlin Bytecode
-    Decompile
-     * */
-    fun foo28(): Unit {
-
-    }
-
-    /**
-     * @JvmOverloads 注解
-     * https://www.jianshu.com/p/72d1959a7c56
-     * */
-    fun foo29() {
-
-        /*
-        * 这个注解对应java中的方法重载
-        * 同一个函数名，参数列表不同
-        * 因为kotlin中有参数的默认值，那么编译成java就是，有几个默认参数，就编译成几个函数
-        * 如果传入的参数少，那么会调用参数多的方法，并传入默认值
-        *
-        * 如果不加这个，在java中只能看到最多参数的那个方法
-        * */
-    }
-    //endregion
-
-
-}
 
 
 //file 中可以定义多个class
 // 而class 中只能定义一个class
 //如果你定义多个class，那么class自动变为file
 
-class KotlinFile {
-    var num = 1;
-    fun fook(): Unit {
+    class KotlinFile {
+        var num = 1;
+        fun fook(): Unit {
 
+        }
     }
-}
 
-class Class11 {
+    class Class11 {
 
-    fun foo1(): Unit {
+        fun foo1(): Unit {
 
-        //let 操作，如果一个对象是可null的，那么用这个操作可以少写 ?.，参考Fragment的oncreate
-        var kk: KotlinFile? = null
-        kk?.let {
-            it.fook()
-            it.fook()
-            it.fook()
+            //let 操作，如果一个对象是可null的，那么用这个操作可以少写 ?.，参考Fragment的oncreate
+            var kk: KotlinFile? = null
+            kk?.let {
+                it.fook()
+                it.fook()
+                it.fook()
+            }
+
+            //apply操作 ，可以返回这个类，在大括号中做其他操作 这样就可以少写对象引用进行初始化了，参考Fragment的newInstance
+            var k1 = KotlinFile().apply {
+                fook()
+            }
+
+
         }
-
-        //apply操作 ，可以返回这个类，在大括号中做其他操作 这样就可以少写对象引用进行初始化了，参考Fragment的newInstance
-        var k1 = KotlinFile().apply {
-            fook()
-        }
-
-
     }
 }
 
