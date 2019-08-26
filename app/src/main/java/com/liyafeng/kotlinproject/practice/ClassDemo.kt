@@ -268,6 +268,17 @@ fun foo1(list: ArrayList<*>): Unit {
     val get: Any? = list[1]
 
 }
+
+
+/**
+ * Kotlin中的MutableList<out T>和Java中的MutableList<? extends T>是一个意思。
+ * Kotlin中的MutableList<in T>和Java中的MutableList<? super T>是一个意思。
+ * MutableList<*>的投影为MutableList<out Any?>。
+ * Kotlin中MyType<*>对应Java中的MyType<?>。
+ *
+ * */
+
+
 //endregion
 
 
@@ -499,19 +510,15 @@ tailrec fun findFixPoint(x: Double = 1.0): Double = if (x == Math.cos(x)) x else
 //协程  在 Kotlin 1.1+ 中协程是实验性的
 
 
-
-
-
-
 //抽象类，抽象方法，抽象成员变量
-abstract class Father{
+abstract class Father {
     protected abstract val layoutId: Int
 
     abstract fun getLayout(): Int
 }
 
 
-class Son:Father(){
+class Son : Father() {
     override fun getLayout(): Int {
         return 1
     }
