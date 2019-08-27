@@ -2,6 +2,7 @@ package com.liyafeng.kotlinproject.practice
 
 import android.content.Context
 import android.view.View
+import com.liyafeng.kotlinproject.practice.demo.Base
 import java.util.*
 
 
@@ -271,6 +272,9 @@ fun foo1(list: ArrayList<*>): Unit {
 
 
 /**
+ * https://www.runoob.com/kotlin/kotlin-generics.html (Kotlin 泛型)
+ * http://www.kotlincn.net/docs/reference/generics.html (泛型)
+ *
  * Kotlin中的MutableList<out T>和Java中的MutableList<? extends T>是一个意思。
  * Kotlin中的MutableList<in T>和Java中的MutableList<? super T>是一个意思。
  * MutableList<*>的投影为MutableList<out Any?>。
@@ -278,6 +282,52 @@ fun foo1(list: ArrayList<*>): Unit {
  *
  * */
 
+//定义泛型
+class Box<T>(value: T) {
+
+
+    fun fun1() {
+        //参数确定，可以写也可以不写
+        val box1 = Box<Int>(2)
+        val box = Box(1)
+    }
+}
+
+interface BaseView {
+    fun funFromBaseView(): Unit {
+
+    }
+
+}
+
+abstract class BaseActivity<T : BasePresenter<BaseView>> : BaseView {
+
+    var mPresenter: T? = null
+    fun onCreate(): Unit {
+        mPresenter = createPresenter()
+        mPresenter?.attach(this)
+    }
+
+    fun onDestory(): Unit {
+        mPresenter?.detach()
+    }
+
+    fun createPresenter(): T? = null
+}
+
+class BasePresenter<T : BaseView> {
+
+    var view: T? = null
+
+    fun attach(view: T): Unit {
+        this.view = view
+    }
+
+    fun detach() {
+        view = null
+    }
+
+}
 
 //endregion
 
