@@ -38,11 +38,11 @@ dependencies {
 
     // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
 //    provided("com.tinkerpatch.tinker:tinker-android-anno:1.9.8")
-    implementation("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.8")
+//    implementation("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.8")
 }
 repositories {
     mavenCentral()
 }
 
 //http://abcghy.github.io/2017/02/25/Tinker-Patch-Tutorial/
-apply from: 'tinkerpatch.gradle'
+//apply from: 'tinkerpatch.gradle'
