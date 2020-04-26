@@ -2,7 +2,20 @@ package com.liyafeng.kotlinproject.practice
 
 //数据类，必须有构造参数，参数必须声明var或者val
 //在 JVM 中，如果要无参的构造函数，则所有的属性必须指定默认值。
+
+/*
+*
+* 初始化，可以用init,也可以直接写在参数上
+* 因为kotlin初始是调用构造函数，然后是init，然后是成员变量（这个看代码顺序来执行）
+*
+* ========构造函数=====
+* 有主次之分，次必须最终委托给主
+* */
 data class User(var name: String = "123", var age: Int = 1) {
+
+    init {
+        age += 1
+    }
 
     fun foo(): Unit {
         //解构声明  https://www.kotlincn.net/docs/reference/multi-declarations.html

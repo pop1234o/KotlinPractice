@@ -2,7 +2,6 @@ package com.liyafeng.kotlinproject.practice
 
 import android.content.Context
 import android.view.View
-import com.liyafeng.kotlinproject.practice.demo.Base
 import java.util.*
 
 
@@ -44,6 +43,14 @@ import java.util.*
  * protected 不适用于顶层声明。因为他只有在有继承的地方出现
  *
  *
+ *
+ * =========设置属性=====
+ *  private val userApiStore: UserApiStore
+ *  get() {
+ *  var dataRepository: UserApiStore = MineDataRepository()
+ *      return dataRepository
+ *   }
+ * 这个每次调用 userApiStore都会new一个出来
  *
  *
  *
@@ -578,6 +585,21 @@ class Son : Father() {
 
 }
 
+/**
+ * @JvmOverloads 注解
+ * https://www.jianshu.com/p/72d1959a7c56
+ * */
+fun foo29() {
+
+    /*
+    * 这个注解对应java中的方法重载
+    * 同一个函数名，参数列表不同
+    * 因为kotlin中有参数的默认值，那么编译成java就是，有几个默认参数，就编译成几个函数
+    * 如果传入的参数少，那么会调用参数多的方法，并传入默认值
+    *
+    * 如果不加这个，在java中只能看到最多参数的那个方法
+    * */
+}
 
 
 
