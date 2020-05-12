@@ -58,6 +58,9 @@ import java.util.*
  * */
 
 
+// region 构造函数
+
+
 //============类的定义==============
 //如果不声明，主构造函数中的参数是val类型的
 // constructor 如果构造函数有注解或可见性修饰符，这个 constructor 关键字是必需的，并且这些修饰符在它前面
@@ -152,22 +155,43 @@ class MyView : View {
 class MyView1(context: Context) : View(context) {
 
 }
+//endregion
 
-
-//
-//
 
 // region  属性，getter setter自定义   field关键字-幕后字段  const关键字-常量 lateinit关键字
 
 
 /**
- * lateinit不能用于原始类型
+ * lateinit 不能用于原始类型
  *
  *
  * */
 fun foo0(): Unit {
 
 }
+
+class C1 {
+    //默认生成getter和setter， 而且要初始化值，或者lateinit或者是抽象的
+    var num = 0
+
+    //这样写就是java的public了，但是也不会自动生成getter 和setter了
+    @JvmField
+    var name: String? = null
+
+    //创建对象
+    var listener1 = object : View.OnClickListener {
+        override fun onClick(v: View?) {
+
+        }
+    }
+
+    //lambda表达式
+    var listener2 = View.OnClickListener {
+
+    }
+}
+
+
 // endregion
 
 

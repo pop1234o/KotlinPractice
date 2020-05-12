@@ -109,7 +109,7 @@ class Practice {
         return this + x;
     }
 
-    /* =============kotlin的函数类型也很给力============
+    /* =============kotlin的函数参数也很给力============
     * 之前我们要写个接口，然后定义方法
     * 然后写回调，现在我们直接将函数类型作为参数
     * fun1(var listener: (data: RankInfoEntity) -> Unit){
@@ -131,6 +131,10 @@ class Practice {
 
     fun fooCallback1(listener: (data: String, code: Int) -> Unit): Unit {
         listener("123", 1)
+
+        fooCallback1 { data, code ->
+            var x=  data+code
+        }
 
 //        fooCallback({ print(it)}) //这里的it就是那边传过来的123参数
 //        fooCallback1((data,code)->{})//两个参数好像不行。。
@@ -176,6 +180,47 @@ class Practice {
         *
         *  }
         */
+    }
+
+    fun setListener(listener: OnXXListener): Unit {
+        setListener(object : OnXXListener {
+            override fun OnClick(aa: Int, bb: String) {
+
+                var x = aa.toString() + bb
+            }
+        })
+
+        //为毛这样就不行？？？
+//        setListener{aa,bb->
+//        }
+
+    }
+
+    fun setYYListener(listener: OnYYListener): Unit {
+//        setYYListener {
+//
+//        }
+//        这样不行，代表()->Unit
+
+        setYYListener(object : OnYYListener {
+            override fun OnClick(aa: Int) {
+
+            }
+        })
+
+//        setYYListener{
+//
+//        }
+
+    }
+
+    interface OnXXListener {
+        fun OnClick(aa: Int, bb: String)
+    }
+
+
+    interface OnYYListener {
+        fun OnClick(aa: Int)
     }
 
 
@@ -470,6 +515,7 @@ class Practice {
             print(i.plus(2))
         }
 
+        //遍历下标
         for (i: Int in list.indices) {
             print(list[i])
         }
@@ -881,13 +927,12 @@ class Practice {
         }
 
         var num = KotlinFile().run {
-            num=2
+            num = 2
             fook()
             "3"
         }
 
         num.trimMargin()
-
 
 
         /*  ==============几个通用的函数==============
