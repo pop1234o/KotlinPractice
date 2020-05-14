@@ -11,6 +11,7 @@ class SampleEntity {
     var defaultUnit: DefaultUnitBean? = null
     var isSelect = false
 
+    //这样生成的一个final getIcon方法，并没有icon变量
     val icon: Int
         get() = when (type) {
             0 -> 0
@@ -19,6 +20,9 @@ class SampleEntity {
             3 -> 3
             else -> 4
         }
+
+    //生成一个 private的final变量，和一个public的get方法，并不能修改值
+    val const=0
 
     class DefaultUnitBean {
         var id: Long = 0

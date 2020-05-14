@@ -224,6 +224,18 @@ class Practice {
     }
 
 
+    //参数上有接口类型参数
+    fun load(x: Int, runnable: Runnable): Unit {
+        load(1, object : Runnable {
+            override fun run() {
+
+            }
+        })
+
+        //lambda表达式
+        load(1, Runnable { })
+    }
+
     //endregion
 
 
