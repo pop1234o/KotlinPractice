@@ -356,6 +356,7 @@ class Practice {
 //            return b
 //        }
 
+        //kotlin没有三目运算符?: 可以用if else代替，也可以直接返回表达式 val a = if(true) a else b
         //直接返回if表达式的值
         return if (a > b) {
             a
