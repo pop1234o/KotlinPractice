@@ -1,5 +1,6 @@
 package com.liyafeng.kotlinproject.practice
 
+import android.app.Application
 import android.content.Context
 import android.view.View
 import java.util.*
@@ -188,6 +189,23 @@ class C1 {
     //lambda表达式
     var listener2 = View.OnClickListener {
 
+    }
+}
+
+//这样通过 MyApplication.context 访问 ，java   MyApplication.Companion.getContext()访问
+
+class MyApplication : Application() {
+
+
+    override fun onCreate() {
+        super.onCreate()
+        context = this
+    }
+
+    companion object {
+        //设置私有的setter，不让外面访问
+        lateinit var context: Application
+            private set
     }
 }
 
