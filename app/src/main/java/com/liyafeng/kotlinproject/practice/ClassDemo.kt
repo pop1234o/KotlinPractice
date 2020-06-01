@@ -163,12 +163,17 @@ class MyView1(context: Context) : View(context) {
 
 
 /**
+ * ============lateinit和lazy ===============
  * lateinit 不能用于原始类型
  *
- *
+ * lateinit 只用于变量 var，而 lazy 只用于常量 val
  * */
-fun foo0(): Unit {
+lateinit var string: String
 
+val name: String by lazy {
+    // lazy内只会调用一次，后面就直接返回值 ，算是懒汉式
+    print(111)
+    "aaa"
 }
 
 class C1 {
