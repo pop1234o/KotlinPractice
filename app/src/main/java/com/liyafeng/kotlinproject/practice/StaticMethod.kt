@@ -25,9 +25,23 @@ class StaticMethod {
         *
         * 静态对象写法 就只能是 object（对象和伴生对象）中写@JvmStatic了
         *
+        *  @JvmStatic只能用在object中，或者  companion object中
         * */
         @JvmStatic
         fun doSome() = 3
+
+
+    }
+
+    /*
+    * 这个就可以定义类中的静态方法
+    * java中 AppUtil.isDebug()
+    *
+    * */
+    object AppUtil {
+
+        @JvmStatic
+        fun isDebug() = false
 
 
     }
