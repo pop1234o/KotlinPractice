@@ -73,7 +73,7 @@ class Practice {
 
         val arrayList = ArrayList<T>();
         for (s in string) {
-            arrayList.add(s);
+//            arrayList.add(s);
         }
         return arrayList;
 

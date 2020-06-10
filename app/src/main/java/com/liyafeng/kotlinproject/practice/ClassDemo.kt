@@ -334,6 +334,8 @@ fun foo1(list: ArrayList<*>): Unit {
  * MutableList<*>的投影为MutableList<out Any?>。
  * Kotlin中MyType<*>对应Java中的MyType<?>。
  *
+ * 星投影，类似Java的 <?>
+ *
  * */
 
 //定义泛型
@@ -354,7 +356,8 @@ interface BaseView {
 
 }
 
-abstract class BaseActivity<T : BasePresenter<BaseView>> : BaseView {
+// out相当于 可以是BaseView的子类 相当于 <? extends BaseView >
+abstract class BaseActivity<T : BasePresenter<out BaseView>> : BaseView {
 
     var mPresenter: T? = null
     fun onCreate(): Unit {
@@ -373,8 +376,8 @@ class BasePresenter<T : BaseView> {
 
     var view: T? = null
 
-    fun attach(view: T): Unit {
-        this.view = view
+    fun attach(view: BaseView): Unit {
+        this.view = view as T
     }
 
     fun detach() {
@@ -382,6 +385,13 @@ class BasePresenter<T : BaseView> {
     }
 
 }
+
+/*
+class AddItemActivity : BaseActivity<AddPresenter>(), AddView
+不需要创建的
+* class MainActivity : BaseActivity<Nothing>()
+*
+* */
 
 //endregion
 
