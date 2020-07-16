@@ -486,6 +486,8 @@ class Practice {
     //  ======tag强转=========
     //  我们用is判断完了后，我们要用as进行转换，因为判断完了后tag还是会改变的，所以
     //  不能保证安全，要用as转完，然后将引用给一个值，然后就可以使用了，因为as转
+    //  as 转换失败  java.lang.ClassCastException
+    //  as? 转换失败  会返回 null
     //  不成功是会报错的 或者用as?
     fun foo4(a: Any?) {
 
