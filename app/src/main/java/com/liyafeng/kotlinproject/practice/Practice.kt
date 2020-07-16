@@ -489,6 +489,8 @@ class Practice {
     //  as 转换失败  java.lang.ClassCastException
     //  as? 转换失败  会返回 null
     //  不成功是会报错的 或者用as?
+    
+    // is 如果是局部变量 ，用is判断完后就可以自动转换了，如果是全局变量就不行，因为有可能在别的地方修改了它的类型
     fun foo4(a: Any?) {
 
         if (a is String) { //如果自动检测出是此类型，那么后面的语句块中无需显式转换

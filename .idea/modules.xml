@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/OtherProject-KotlinPractice.iml" filepath="$PROJECT_DIR$/OtherProject-KotlinPractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/kotlinPro.iml" filepath="$PROJECT_DIR$/kotlinPro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mypro-KotlinPractice.iml" filepath="$PROJECT_DIR$/mypro-KotlinPractice.iml" group="KotlinPractice" />
+      <module fileurl="file://$PROJECT_DIR$/app/mypro-KotlinPractice-app.iml" filepath="$PROJECT_DIR$/app/mypro-KotlinPractice-app.iml" group="KotlinPractice/app" />
     </modules>
   </component>
 </project>
