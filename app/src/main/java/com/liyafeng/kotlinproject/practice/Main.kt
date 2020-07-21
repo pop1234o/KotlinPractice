@@ -10,7 +10,8 @@ package com.liyafeng.kotlinproject.practice
  * https://www.kotlincn.net/docs/reference/
  *
  *
- *
+ * Gson  json 转 List
+ * val fromJson = Gson().fromJson<List<Entity>>(""" [{},{},{}] """, object : TypeToken<List<Entity>>() {}.type)
  *
  *
  * */
